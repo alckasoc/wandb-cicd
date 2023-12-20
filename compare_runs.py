@@ -6,6 +6,7 @@ assert os.getenv('WANDB_API_KEY'), 'You must set the WANDB_API_KEY environment v
 def get_baseline_run(entity='vincenttu', project='cicd_and_wandb', tag='baseline'):
     "Get the baseline run from the project using tags"
 
+    print(f"{entity} | {project} | {tag}")
     api = wandb.Api()
     runs=api.runs(f'{entity}/{project}', {"tags": {"$in": [tag]}})
     assert len(runs) == 1, 'There must be exactly one run with the tag "baseline"'
