@@ -30,10 +30,22 @@ def compare_runs(entity='vincenttu',
                        title='Compare Runs',
                        description=f"A comparison of runs, the baseline run name is {baseline.name}") 
 
-    pg = wr.PanelGrid(
-        runsets=[wr.Runset(entity, project, "Run Comparison").set_filters_with_python_expr(f"ID in ['{run_id}', '{baseline.id}']")],
-        panels=[wr.RunComparer(diff_only='split', layout={'w': 24, 'h': 15}),]
-    )
+    pg = [
+        wr.PanelGrid(
+            runsets=[
+                (
+                    wr.Runset(entity, project, "Run Comparison")
+                    .set_filters_with_python_expr(f"ID in ['{run_id}', '{baseline.id}']")
+                )
+            ],
+            panels=[
+                wr.LinePlot(x="train/global_step", y="train/loss", layout={'x': 0, 'y': 0, 'w': 12, 'h': 8}),
+                wr.LinePlot(x="train/global_step", y="eval/loss", layout={'x': 4, 'y': 0, 'w': 12, 'h': 8}),
+                wr.RunComparer(diff_only='split', layout={'w': 24, 'h': 15})
+            ],
+
+        )
+    ]
     report.blocks = report.blocks[:1] + [pg] + report.blocks[1:]
     report.save()
 
