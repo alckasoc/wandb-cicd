@@ -46,7 +46,7 @@ def compare_runs(entity='vincenttu',
 
         )
     ]
-    report.blocks = report.blocks[:1] + [pg] + report.blocks[1:]
+    report.blocks = report.blocks[:1] + pg + report.blocks[1:]
     report.save()
 
     if os.getenv('CI'): # is set to `true` in GitHub Actions https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
