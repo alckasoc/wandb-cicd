@@ -1,4 +1,4 @@
-import os, wandb
+import os, wandb, sys
 import wandb.apis.reports as wr
 
 assert os.getenv('WANDB_API_KEY'), 'You must set the WANDB_API_KEY environment variable'
@@ -23,7 +23,7 @@ def compare_runs(entity='vincenttu',
     project = os.getenv('WANDB_PROJECT') or project
     tag = os.getenv('BASELINE_TAG') or tag
     run_id = os.getenv('RUN_ID') or run_id
-    print(f"{entity} | {project} | {tag} | {run_id}")
+    print(f"{entity} | {project} | {tag} | {run_id}", file=sys.stdout)
     assert run_id, 'You must set the RUN_ID environment variable or pass a `run_id` argument'
 
     baseline = get_baseline_run(entity=entity, project=project, tag="baseline")
