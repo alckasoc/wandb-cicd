@@ -26,7 +26,7 @@ def compare_runs(entity='vincenttu',
     run_id = os.getenv('RUN_ID') or run_id
     assert run_id, 'You must set the RUN_ID environment variable or pass a `run_id` argument'
 
-    baseline = get_baseline_run(entity=entity, project=project, tag=tag)
+    baseline = get_baseline_run(entity=entity, project=project, tag="baseline")
     report = wr.Report(entity=entity, project=project,
                        title='Compare Runs',
                        description=f"A comparison of runs, the baseline run name is {baseline.name}") 
